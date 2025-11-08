@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+</head>
+<body>
+    <h2>Student Registration Form</h2>
+    <form action="https://newerp.kluniversity.in">
+        <h3>Personal Information</h3>
+        <label>Full Name:</label> <input type="text" required><br>
+        <label>Gender:</label> <br> <input type="radio" name="gn" value="m">Male <br>
+        <input type="radio" name="gn" value="f">Female
+        <br>
+        <label>Email:</label><input type="email" required><br><br>
+        <label>Contact</label> <input type="tel" pattern=[0-9]{10} required> <br><br>
+        <label>Date of Birth:</label><input type="date" required> <br><br>
+        <label>Address</label> <textarea rows="4" required>
+                </textarea> 
+        <h3>Academic Details</h3>
+        <label>Branch:</label>
+        <select>
+            <option value="">--select--</option>
+            <option value="cse">Computer Engineering</option>
+            <option value="ece">Electronics engineering</option>
+            <option value="eee">Electrical Engineering</option>
+            <option value="me">Mechanical engineering</option>
+        </select> <br><br>
+        <label>Languages Known:</label>
+        <input type="checkbox" name="cb" value="tel"> Telugu
+        <input type="checkbox" name="cb" value="hin"> Hindi
+        <input type="checkbox" name="cb" value="eng"> English
+        <input type="checkbox" name="cb" value="tam"> Tamil
+        <br><br>
+        <label>Upload fil'1</label>
+        <input type="file"><br><br>
+        <button>Submit</button>
+
+    </form>
+</body>
+</html>

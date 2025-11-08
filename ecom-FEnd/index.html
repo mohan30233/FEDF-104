@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Career Assessment Tool</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #4a90e2;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    .container {
+      max-width: 850px;
+      margin: 20px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    button {
+      background: #4a90e2;
+      color: white;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      margin: 5px;
+      cursor: pointer;
+    }
+    button:hover { background: #357abd; }
+    .hidden { display: none; }
+    ul { list-style-type: disc; margin-left: 20px; }
+    .img-box {
+      text-align: center;
+      margin: 15px 0;
+    }
+    .img-box img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Career Assessment Tool</h1>
+  </header>
+
+  <div class="container" id="home">
+    <h2>Welcome</h2>
+    <div class="img-box">
+      <img src="https://source.unsplash.com/800x300/?career,students" alt="Career Choice">
+    </div>
+    <p>Select your role:</p>
+    <button onclick="showSection('student')">Student</button>
+    <button onclick="showSection('admin')">Admin</button>
+  </div>
+
+  <!-- Student Section -->
+  <div class="container hidden" id="student">
+    <h2>Student Assessment</h2>
+    <div class="img-box">
+      <img src="https://source.unsplash.com/800x300/?student,exam" alt="Student Assessment">
+    </div>
+    <div id="questionArea"></div>
+    <div id="resultArea" class="hidden"></div>
+    <button onclick="backHome()">Back</button>
+  </div>
+
+  <!-- Admin Section -->
+  <div class="container hidden" id="admin">
+    <h2>Admin Dashboard</h2>
+    <div class="img-box">
+      <img src="https://source.unsplash.com/800x300/?teacher,management" alt="Admin Dashboard">
+    </div>
+    <h3>Manage Careers</h3>
+    <ul id="careerList"></ul>
+    <input type="text" id="newCareer" placeholder="Add new career">
+    <button onclick="addCareer()">Add</button>
+    <br><br>
+    <button onclick="backHome()">Back</button>
+  </div>
+
+  <script>
+    const careers = ["Software Developer", "Teacher", "Designer", "Analyst"];
+    let currentQuestion = 0;
+    const answers = {};
+
+    const questions = [
+      "Do you enjoy problem-solving?",
+      "Do you prefer working with people?",
+      "Do you like creative work?"
+    ];
+
+    function showSection(section) {
+      document.getElementById("home").classList.add("hidden");
+      document.getElementById("student").classList.add("hidden");
+      document.getElementById("admin").classList.add("hidden");
+      document.getElementById(section).classList.remove("hidden");
+
+      if (section === "student") startAssessment();
+      if (section === "admin") loadCareers();
+    }
+
+    function backHome() {
+      document.getElementById("home").classList.remove("hidden");
+      document.getElementById("student").classList.add("hidden");
+      document.getElementById("admin").classList.add("hidden");
+    }
+
+    // ---------------- STUDENT ----------------
+    function startAssessment() {
+      currentQuestion = 0;
+      document.getElementById("resultArea").classList.add("hidden");
+      showQuestion();
+    }
+
+    function showQuestion() {
+      if (currentQuestion < questions.length) {
+        document.getElementById("questionArea").innerHTML = `
+          <p>${questions[currentQuestion]}</p>
+          <button onclick="answer('yes')">Yes</button>
+          <button onclick="answer('no')">No</button>
+        `;
+      } else {
+        calculateResult();
+      }
+    }
+
+    function answer(ans) {
+      answers[currentQuestion] = ans;
+      currentQuestion++;
+      showQuestion();
+    }
+
+    function calculateResult() {
+      let result = "Suggested Career: Analyst 📊";
+      if (answers[0] === "yes" && answers[1] === "no")
+        result = "Suggested Career: Software Developer 💻";
+      else if (answers[1] === "yes")
+        result = "Suggested Career: Teacher 👩‍🏫";
+      else if (answers[2] === "yes")
+        result = "Suggested Career: Designer 🎨";
+
+      document.getElementById("questionArea").innerHTML = "";
+      document.getElementById("resultArea").classList.remove("hidden");
+      document.getElementById("resultArea").innerHTML = `
+        <h3>${result}</h3>
+        <div class="img-box">
+          <img src="https://source.unsplash.com/800x300/?career,${result.split(':')[1]}" alt="Career Result">
+        </div>
+      `;
+    }
+
+    // ---------------- ADMIN ----------------
+    function loadCareers() {
+      const list = document.getElementById("careerList");
+      list.innerHTML = "";
+      careers.forEach(c => {
+        const li = document.createElement("li");
+        li.textContent = c;
+        list.appendChild(li);
+      });
+    }
+
+    function addCareer() {
+      const newCareer = document.getElementById("newCareer").value.trim();
+      if (newCareer !== "") {
+        careers.push(newCareer);
+        document.getElementById("newCareer").value = "";
+        loadCareers();
+      }
+    }
+  </script>
+</body>
+</html>

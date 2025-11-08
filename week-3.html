@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Web Page - Mobile Friendly Design</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      color: #222;
+      background-color: #fafafa;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    /* Navigation */
+    .navbar {
+      background: #ffffffcc;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .nav-logo {
+      color: #ff6b6b;
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
+    .nav-menu {
+      display: flex;
+      gap: 1.8rem;
+    }
+    .nav-link {
+      text-decoration: none;
+      color: #222;
+      font-weight: 500;
+      position: relative;
+    }
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: #ff6b6b;
+      left: 0;
+      bottom: -4px;
+      transition: 0.3s;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .hamburger .bar {
+      width: 25px;
+      height: 3px;
+      background-color: #333;
+      margin: 3px 0;
+      transition: 0.3s;
+    }
+
+    /* Hero */
+    .hero-section {
+      background: linear-gradient(135deg, #ff6b6b 0%, #f06595 100%);
+      color: white;
+      padding: 120px 0 80px;
+      margin-top: 70px;
+    }
+    .hero-section .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .hero-content h2 { font-size: 3rem; margin-bottom: 1.2rem; }
+    .hero-content p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.95; }
+    .cta-button {
+      background: #222;
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 40px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .cta-button:hover {
+      background: #000;
+      transform: scale(1.05);
+    }
+
+    .responsive-image, .service-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      transition: transform 0.3s ease;
+    }
+    .responsive-image:hover, .service-image:hover {
+      transform: scale(1.05);
+    }
+
+    /* About */
+    .about-section { padding: 80px 0; background: white; }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .feature-card {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      text-align: center;
+      border: 1px solid #eee;
+      transition: 0.3s;
+    }
+    .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    .feature-card h3 { color: #ff6b6b; margin-bottom: 1rem; }
+
+    /* Services */
+    .services-section { padding: 80px 0; background: #fafafa; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2rem;
+    }
+    .service-item {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      transition: 0.3s;
+    }
+    .service-item:hover { transform: translateY(-8px); }
+    .service-item h3, .service-item p { padding: 0 1.5rem; }
+    .service-item h3 { margin-top: 1.2rem; color: #333; }
+    .service-item p { margin-bottom: 1.5rem; color: #666; }
+
+    /* Contact */
+    .contact-section {
+      padding: 80px 0;
+      background: linear-gradient(135deg, #f06595 0%, #845ef7 100%);
+      color: white;
+    }
+
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 1.8rem 0;
+    }
+
+    /* Responsive */
+    @media screen and (max-width: 768px) {
+      .hamburger { display: flex; }
+      .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background: #fff;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        padding: 2rem 0;
+      }
+      .nav-menu.active { left: 0; }
+      .hero-section .container { grid-template-columns: 1fr; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="nav-container">
+        <h1 class="nav-logo">ResponsiveSite</h1>
+        <div class="nav-menu">
+          <a href="#home" class="nav-link">Home</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="#services" class="nav-link">Services</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </div>
+        <div class="hamburger">
+          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section id="home" class="hero-section">
+      <div class="container">
+        <div class="hero-content">
+          <h2>Design That Adapts</h2>
+          <p>Experience a beautifully crafted, responsive website that fits every device perfectly.</p>
+          <button class="cta-button">Explore Now</button>
+        </div>
+        <div class="hero-image">
+          <img src="istockphoto-1410270664-612x612.jpg" 
+               alt="Creative workspace" 
+               class="responsive-image">
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="about-section">
+      <div class="container">
+        <h2>Why Choose Us?</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <h3>Modern UI</h3>
+            <p>Clean, minimalist designs focused on user engagement.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Performance</h3>
+            <p>Optimized layouts and fast-loading images for smooth browsing.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Scalability</h3>
+            <p>Our responsive approach ensures your site grows with your business.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="services-section">
+      <div class="container">
+        <h2>What We Do</h2>
+        <div class="services-grid">
+          <div class="service-item">
+            <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" 
+                 alt="Analytics" class="service-image">
+            <h3>Analytics</h3>
+            <p>Insightful dashboards that help track and improve performance.</p>
+          </div>
+          <div class="service-item">
+            <img src="kakashi.jpg" 
+                 alt="App Development" class="service-image">
+            <h3>App Development</h3>
+            <p>Seamless mobile-first solutions that keep users engaged.</p>
+          </div>
+          <div class="service-item">
+            <img src="klu_logo.jpg" 
+                 alt="UI UX" class="service-image">
+            <h3>UI/UX</h3>
+            <p>Designing intuitive experiences that delight users across platforms.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact-section">
+      <div class="container">
+        <h2>Contact Us</h2>
+        <p>Have a project in mind? Let’s build something amazing together!</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 ResponsiveSite. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
